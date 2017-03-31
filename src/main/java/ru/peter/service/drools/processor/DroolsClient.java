@@ -1,4 +1,4 @@
-package ru.peter.service.drools;
+package ru.peter.service.drools.processor;
 
 import ru.peter.service.drools.model.Client;
 import ru.peter.service.drools.model.ClientResult;

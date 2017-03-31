@@ -1,5 +1,6 @@
-package ru.peter.service.drools;
+package ru.peter.service.drools.processor;
 
+import ru.peter.service.drools.api.ClientProcessor;
 import ru.peter.service.drools.model.Client;
 import ru.peter.service.drools.model.ClientResult;
 import ru.peter.service.drools.model.Subscriber;

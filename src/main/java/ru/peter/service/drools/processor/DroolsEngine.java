@@ -1,4 +1,4 @@
-package ru.peter.service.drools;
+package ru.peter.service.drools.processor;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
