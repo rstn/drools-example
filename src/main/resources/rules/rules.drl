@@ -1,0 +1,21 @@
+package org.drools.workshop;
+
+import ru.peter.service.drools.DroolsClient
+import ru.peter.service.drools.model.ClientResult
+import ru.peter.service.drools.model.Subscriber
+import java.util.List
+
+rule "SubscribersSpent"
+  when
+    $client: DroolsClient()
+  then
+    List<Subscriber> subscribers = $client.getClient().getSubscribers();
+    long sum =0;
+    for (Subscriber subscriber : subscribers) {
+      sum+=subscriber.getSpent();
+    }
+    ClientResult clientResult = $client.getClientResult();
+    clientResult.setClientId($client.getClient().getClientId());
+    clientResult.setSpentTotal(sum);
+    clientResult.setBig(subscribers.size()>100);
+end
