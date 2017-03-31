@@ -8,7 +8,10 @@ public class DroolsClientProcessor implements ClientProcessor {
     private final DroolsEngine droolsEngine = new DroolsEngine();
 
     public ClientResult process(Client client) {
-        DroolsClient droolsClient = new DroolsClient(client, new ClientResult());
+        ClientResult clientResult = new ClientResult();
+        clientResult.setClientId(client.getClientId());
+
+        DroolsClient droolsClient = new DroolsClient(client, clientResult);
         droolsEngine.getSession().insert(droolsClient);
         droolsEngine.getSession().fireAllRules();
         return droolsClient.getClientResult();

@@ -7,15 +7,15 @@ import java.util.List
 
 rule "isBigClient"
 when
-    $client: DroolsClient(client.subscribers.size() > 100)
+    $client: DroolsClient(client.subscribers != null)
 then
     ClientResult clientResult = $client.getClientResult();
-    clientResult.setBig(true);
+    clientResult.setBig($client.getClient().getSubscribers().size() > 100);
 end
 
 rule "sumSubscribersSpent"
   when
-    $client: DroolsClient()
+    $client: DroolsClient(client.subscribers != null)
   then
     List<Subscriber> subscribers = $client.getClient().getSubscribers();
     long sum =0;

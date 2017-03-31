@@ -54,11 +54,48 @@ public class ClientProcessorTest {
         ClientResult result = clientProcessor.process(testSumClient);
         assertEquals(25L, result.getSpentTotal());
         assertFalse(result.isBig());
+        assertEquals(testSumClient.getClientId(), result.getClientId());
     }
 
     @Test
     public void testIsBig() {
         ClientResult result = clientProcessor.process(testBigClient);
         assertTrue(result.isBig());
+        assertEquals(testBigClient.getClientId(), result.getClientId());
+    }
+
+    @Test
+    public void testClientsProcessor() {
+        List<Client> clients = generateClients();
+        for (Client client : clients) {
+            ClientResult reult = clientProcessor.process(client);
+            assertEquals(client.getClientId(), reult.getClientId());
+            assertFalse(reult.isBig());
+        }
+    }
+
+    private List<Client> generateClients() {
+        List<Client> clients = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Client client = new Client();
+            client.setClientId(i);
+            client.setSubscribers(generateSubscribers());
+            clients.add(client);
+        }
+        Client client = new Client();
+        client.setClientId(5);
+        clients.add(client);
+        return clients;
+    }
+
+    private List<Subscriber> generateSubscribers() {
+        List<Subscriber> subscribers = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Subscriber subscriber = new Subscriber();
+            subscriber.setSpent(1);
+            subscriber.setId(i);
+            subscribers.add(subscriber);
+        }
+        return subscribers;
     }
 }
